@@ -25,19 +25,19 @@ public class BeerServiceJPA implements BeerService {
     public List<BeerDTO> listBeers() {
         return beerRepository.findAll()
                 .stream()
-                .map(beerMapper::beerToBeerDTO)
+                .map(beerMapper::beerToBeerDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Optional<BeerDTO> getBeerById(UUID id) {
-        return Optional.ofNullable(beerMapper.beerToBeerDTO(beerRepository.findById(id)
+        return Optional.ofNullable(beerMapper.beerToBeerDto(beerRepository.findById(id)
                 .orElse(null)));
     }
 
     @Override
     public BeerDTO saveNewBeer(BeerDTO beer) {
-        return beerMapper.beerToBeerDTO(beerRepository.save(beerMapper.beerDtoToBeer(beer)));
+        return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beer)));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class BeerServiceJPA implements BeerService {
             foundBeer.setUpc(beer.getUpc());
             foundBeer.setPrice(beer.getPrice());
             optionalBeerDTO.set(Optional.of(beerMapper
-                    .beerToBeerDTO(beerRepository.save(foundBeer))));
+                    .beerToBeerDto(beerRepository.save(foundBeer))));
             beerRepository.save(foundBeer);
 
         }, ()-> optionalBeerDTO.set(Optional.empty()));

@@ -50,8 +50,19 @@ public class BootstrapData implements CommandLineRunner {
                     .updateDate(LocalDateTime.now())
                     .build();
 
+            Beer beer3 = Beer.builder()
+                    .beerName("Galaxy Cat 3")
+                    .beerStyle(BeerStyle.PALE_ALE)
+                    .upc("12356")
+                    .price(new BigDecimal("12.99"))
+                    .quantityOnHand(122)
+                    .createdDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
+                    .build();
+
             beerRepository.save(beer1);
             beerRepository.save(beer2);
+            beerRepository.save(beer3);
         }
 
 
